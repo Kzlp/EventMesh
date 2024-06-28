@@ -1,10 +1,10 @@
-# EventMesh通用中间件 API 参考手册
+# EventMesh General Middleware API Reference Manual
 
-EventMesh是一种动态基础中间件，在事件驱动架构语境中，事件指的是系统中的变更、操作或观察，他们会生成通知，然后响应到各个对事件做出响应的处理器函数中，从而实现解耦合的目的。
+EventMesh is a dynamic middleware designed for use within an event-driven architecture framework. In this context, "events" refer to changes, actions, or observations within the system that generate notifications. These are then dispatched to various handler functions that respond to the events, thereby achieving decoupling.
 
-使用该中间件的原因是因为业务功能模块之间存在很多直接的调用关系，导致驱动和业务之间的沟通变成了一个强关联的关系，导致我们业务拆解十分复杂，为了独立每个功能块，拆解功能和需求以及产品之间的耦合关系，需要使用独立出来的中间件来解决相关之间的业务耦合和功能耦合，方便分层开发。
+The rationale for using this middleware stems from the existence of many direct calling relationships between business function modules, which turn the communication between the drivers and the business into a tightly coupled relationship. This complexity makes business modularization very challenging. To isolate each function block and break down the coupling between functions, requirements, and products, it is necessary to employ a standalone middleware. This middleware resolves business and functional couplings, facilitating layered development.
 
-## 注册事件
+## Event Registration
 
 ### `EventMesh.subscribe`
 
@@ -12,17 +12,17 @@ EventMesh是一种动态基础中间件，在事件驱动架构语境中，事�
 EventMesh.subscribe(topic, function)
 ```
 
-**参数**
+**Parameters**
 
-- `topic` - 自定义事件函数名称，字符串类型。
--  `function `- 事件函数。
-  - function(topic, data=None),事件函数必须接收两个参数。
-    - `topic` - 事件函数名称。
-    - `data` - 携带的参数，可设置默认值，调用时无需传参。
+- `topic` - The name of the custom event function, a string.
+- `function` \- The event function.
+  - function(topic, data=None) - The event function must accept two parameters:
+    - `topic` - The name of the event function.
+    - `data` - The parameters carried, can be set to a default so that no arguments need to be passed when called.
 
-> 事件函数必须先注册才可通过发布topic的方式执行
+> The event function must be registered before it can be executed by publishing a topic.
 
-## 同步发布事件
+## Synchronous Event Publishing
 
 ### `EventMesh.publish`
 
@@ -30,33 +30,16 @@ EventMesh.subscribe(topic, function)
 EventMesh.publish(topic, data)
 ```
 
-**参数**
+**Parameters**
 
-- `topic` - 自定义事件函数名称，字符串类型。
--  `data `- 事件函数所需要的形参，有默认值可不传。
+- `topic` - The name of the custom event function, a string.
+- `data` - The formal parameters required by the event function, can have a default value and thus not require passing.
 
-**返回值**
+**Return Value**
 
-接收对应事件执行函数的返回结果
+Returns the result of the corresponding event execution function.
 
-## 异步发布事件
-
-### `EventMesh.publish_async`
-
-```python
-EventMesh.publish_async(topic, data)
-```
-
-**参数**
-
-- `topic` - 自定义事件函数名称，字符串类型。
--  `data `- 事件函数所需要的形参，有默认值可不传。
-
-**返回值**
-
-异步发布事件的方式无返回值
-
-## 异步发布事件
+## Asynchronous Event Publishing
 
 ### `EventMesh.publish_async`
 
@@ -64,11 +47,11 @@ EventMesh.publish_async(topic, data)
 EventMesh.publish_async(topic, data)
 ```
 
-**参数**
+**Parameters**
 
-- `topic` - 自定义事件函数名称，字符串类型。
--  `data `- 事件函数所需要的形参，有默认值可不传。
+- `topic` - The name of the custom event function, a string.
+- `data` - The formal parameters required by the event function, can have a default value and thus not require passing.
 
-**返回值**
+**Return Value**
 
-异步发布事件的方式无返回值
+Asynchronous event publishing does not return a value.
